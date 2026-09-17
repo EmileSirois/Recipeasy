@@ -19,22 +19,30 @@ function LoginPage({ props }) {
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
       <Field props={{ placeholder: "Username" }} />
       <Field props={{ placeholder: "Password", secureTextEntry: true }} />
-      <Button name="LoginButton" color="black" title="Login">
-        login
-      </Button>
-      <Text
-        name="SignUpLink"
-        style={{ color: "blue", textDecorationLine: "underline", fontSize: 12 }}
+      <Button name="CreateAccountButton" color="black" title="Create Account" />
+
+      <View
+        name="SignUpLinkView"
+        style={{ alignItems: "center", marginTop: 10 }}
       >
-        Sign up!
-      </Text>
+        <Text
+          name="SignUpLink"
+          style={{
+            color: "blue",
+            textDecorationLine: "underline",
+            fontSize: 12,
+          }}
+        >
+          Sign up!
+        </Text>
+      </View>
     </View>
   );
 }
 
 function SignUpPage({ props }) {
   return (
-    <View name="SignUpView" style={[styles.centerBox, styles.formContainer]}>
+    <View name="SignUpView" style={[styles.formContainer, styles.centerBox]}>
       <Field props={{ placeholder: "Username" }} />
       <Field props={{ placeholder: "Password", secureTextEntry: true }} />
       <Field
@@ -111,9 +119,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={[styles.screen]}>
-        <LoginPage />
+        {/* <LoginPage /> */}
         {/* <SignUpPage /> */}
-        {/* <MainPage props={{ options: options }} /> */}
+        <MainPage props={{ options }} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
