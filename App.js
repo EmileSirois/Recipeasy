@@ -4,7 +4,7 @@ import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-function Field({ props }) {
+function Field(props) {
   return (
     <TextInput
       style={[styles.textInput, props.style]}
@@ -14,11 +14,11 @@ function Field({ props }) {
   );
 }
 
-function LoginPage({ props }) {
+function LoginPage() {
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
-      <Field props={{ placeholder: "Username" }} />
-      <Field props={{ placeholder: "Password", secureTextEntry: true }} />
+      <Field placeholder="Username" />
+      <Field placeholder="Password" secureTextEntry={true} />
       <Button name="CreateAccountButton" color="black" title="Create Account" />
 
       <View
@@ -40,31 +40,47 @@ function LoginPage({ props }) {
   );
 }
 
-function SignUpPage({ props }) {
+function SignUpPage() {
   return (
     <View name="SignUpView" style={[styles.formContainer, styles.centerBox]}>
-      <Field props={{ placeholder: "Username" }} />
-      <Field props={{ placeholder: "Password", secureTextEntry: true }} />
-      <Field
-        props={{ placeholder: "Password Confirmation", secureTextEntry: true }}
-      />
+      <Field placeholder="Username" />
+      <Field placeholder="Password" secureTextEntry={true} />
+      <Field placeholder="Password Confirmation" secureTextEntry={true} />
       <Button name="CreateAccountButton" color="black" title="Create Account" />
     </View>
   );
 }
 
-function MainPage({ props }) {
+function MainPage() {
+  const options = [
+    {
+      id: "1",
+      label: "Breakfast",
+      value: "1",
+    },
+    {
+      id: "2",
+      label: "Lunch",
+      value: "2",
+    },
+    {
+      id: "3",
+      label: "Dinner",
+      value: "3",
+    },
+  ];
+
   return (
     <View name="MainView" style={[styles.centerBox, styles.recipeContainer]}>
       <RadioGroup
         containerStyle={{ flex: 1, justifyContent: "space-between" }}
         name="MealTypeGroup"
-        radioButtons={props.options}
+        radioButtons={options}
         layout="row"
       />
 
       <View name="NameInputView" style={{ flex: 1 }}>
-        <Field props={{ placeholder: "Name" }} />
+        <Field placeholder="Name" />
       </View>
 
       <View name="DurationView" style={[styles.durationPicker]}>
@@ -98,30 +114,12 @@ function MainPage({ props }) {
 }
 
 export default function App() {
-  const options = [
-    {
-      id: "1",
-      label: "Breakfast",
-      value: "1",
-    },
-    {
-      id: "2",
-      label: "Lunch",
-      value: "2",
-    },
-    {
-      id: "3",
-      label: "Dinner",
-      value: "3",
-    },
-  ];
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={[styles.screen]}>
         {/* <LoginPage /> */}
         {/* <SignUpPage /> */}
-        <MainPage props={{ options }} />
+        <MainPage />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -139,7 +137,6 @@ const styles = StyleSheet.create({
     maxWidth: 600,
   },
   formContainer: {
-    maxHeight: "60%",
     gap: 20,
     padding: 20,
   },
