@@ -3,11 +3,20 @@ import { styles } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
 export default function LoginPage() {
+  function handlePressed() {
+    navigation.navigate("ListPage");
+  }
+
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
       <Field placeholder="Username" />
       <Field placeholder="Password" secureTextEntry={true} />
-      <Button name="CreateAccountButton" color="black" title="Create Account" />
+      <Button
+        name="CreateAccountButton"
+        color="black"
+        title="Create Account"
+        onPress={() => handlePressed()}
+      />
 
       <View
         name="SignUpLinkView"
