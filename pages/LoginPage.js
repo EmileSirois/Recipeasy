@@ -2,7 +2,7 @@ import { Text, Button, View } from "react-native";
 import { styles } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
-export default function LoginPage() {
+export default function LoginPage({ navigation }) {
   function handlePressed() {
     navigation.navigate("ListPage");
   }
