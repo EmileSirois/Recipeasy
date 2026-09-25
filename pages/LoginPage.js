@@ -3,8 +3,8 @@ import { styles } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
 export default function LoginPage({ navigation }) {
-  function handlePressed() {
-    navigation.navigate("ListPage");
+  function handlePressed(props) {
+    navigation.navigate(props);
   }
 
   return (
@@ -13,9 +13,9 @@ export default function LoginPage({ navigation }) {
       <Field placeholder="Password" secureTextEntry={true} />
       <Button
         name="CreateAccountButton"
-        color="black"
+        color="#2C2C2C"
         title="Create Account"
-        onPress={() => handlePressed()}
+        onPress={() => handlePressed("ListPage")}
       />
 
       <View
@@ -25,10 +25,11 @@ export default function LoginPage({ navigation }) {
         <Text
           name="SignUpLink"
           style={{
-            color: "blue",
+            color: "#2C2C2C",
             textDecorationLine: "underline",
-            fontSize: 12,
+            fontSize: 15,
           }}
+          onPress={() => handlePressed("SignUpPage")}
         >
           Sign up!
         </Text>
