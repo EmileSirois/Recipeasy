@@ -2,6 +2,7 @@ import { Text, Button, View } from "react-native";
 import { styles } from "../style/Styles.js";
 import { useNavigation } from "@react-navigation/native";
 import Field from "../components/Field.js";
+import Recipes from "../data/Recipes.json";
 
 export default function ListPage() {
   const navigation = useNavigation();
@@ -14,6 +15,8 @@ export default function ListPage() {
     description:
       "Recette test pour la nivigation distincte entre les modes de l'application",
   };
+
+  console.log(Recipes);
 
   function handlePressed(mode) {
     if (mode === "add") {

@@ -1,0 +1,72 @@
+[
+  {
+    "category": 1,
+    "name": "Poulet au beurre à l'ail",
+    "durationHours": 0,
+    "durationMinutes": 35,
+    "description": "Poitrines de poulet poêlées dans une sauce crémeuse au beurre, ail et fines herbes, servies avec du riz."
+  },
+  {
+    "category": 2,
+    "name": "Salade César maison",
+    "durationHours": 0,
+    "durationMinutes": 20,
+    "description": "Laitue romaine croquante, croûtons faits maison, parmesan et vinaigrette César préparée à partir de zéro."
+  },
+  {
+    "category": 3,
+    "name": "Chili con carne",
+    "durationHours": 1,
+    "durationMinutes": 15,
+    "description": "Mijoté de bœuf haché, haricots rouges et tomates, relevé aux épices mexicaines et servi avec du pain."
+  },
+  {
+    "category": 1,
+    "name": "Saumon grillé au citron",
+    "durationHours": 0,
+    "durationMinutes": 25,
+    "description": "Filet de saumon grillé, mariné au citron et à l'aneth, accompagné de légumes vapeur."
+  },
+  {
+    "category": 4,
+    "name": "Tarte aux pommes classique",
+    "durationHours": 1,
+    "durationMinutes": 30,
+    "description": "Pâte brisée maison garnie de pommes caramélisées à la cannelle, cuite au four jusqu'à dorure."
+  },
+  {
+    "category": 2,
+    "name": "Soupe minestrone",
+    "durationHours": 0,
+    "durationMinutes": 45,
+    "description": "Soupe italienne aux légumes, haricots blancs et pâtes courtes, mijotée dans un bouillon de tomates."
+  },
+  {
+    "category": 3,
+    "name": "Pâtes carbonara",
+    "durationHours": 0,
+    "durationMinutes": 25,
+    "description": "Spaghettis enrobés d'une sauce crémeuse aux œufs, parmesan et lardons croustillants."
+  },
+  {
+    "category": 1,
+    "name": "Curry de pois chiches",
+    "durationHours": 0,
+    "durationMinutes": 40,
+    "description": "Pois chiches mijotés dans une sauce au lait de coco et épices indiennes, servis avec du riz basmati."
+  },
+  {
+    "category": 4,
+    "name": "Brownies au chocolat",
+    "durationHours": 0,
+    "durationMinutes": 50,
+    "description": "Carrés de chocolat fondant, moelleux à l'intérieur avec une croûte légèrement craquante sur le dessus."
+  },
+  {
+    "category": 2,
+    "name": "Bol de riz aux légumes sautés",
+    "durationHours": 0,
+    "durationMinutes": 30,
+    "description": "Riz sauté avec un mélange de légumes croquants et sauce soya-gingembre, prêt en un seul wok."
+  }
+]

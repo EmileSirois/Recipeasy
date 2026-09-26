@@ -23,25 +23,30 @@ const MyTheme = {
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator style={[styles.screen]} initialRouteName="LoginPage">
-        <Stack.Screen name="LoginPage" component={LoginPage} />
-        <Stack.Screen name="SignUpPage" component={SignUpPage} />
-        <Stack.Screen name="MainPage" component={MainPage} />
-        <Stack.Screen
-          name="ListPage"
-          component={ListPage}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <Button
-                title="Log out"
-                color="#77716C"
-                onPress={() => navigation.navigate("LoginPage")}
-              />
-            ),
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer theme={MyTheme}>
+          <Stack.Navigator style={[styles.screen]} initialRouteName="LoginPage">
+            <Stack.Screen name="LoginPage" component={LoginPage} />
+            <Stack.Screen name="SignUpPage" component={SignUpPage} />
+            <Stack.Screen name="MainPage" component={MainPage} />
+            <Stack.Screen
+              name="ListPage"
+              component={ListPage}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <Button
+                    title="Log out"
+                    color="#77716C"
+                    onPress={() => navigation.navigate("LoginPage")}
+                  />
+                ),
+                headerBackVisible: false,
+              })}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
