@@ -7,27 +7,23 @@ import Recipes from "../data/Recipes.json";
 export default function ListPage() {
   const navigation = useNavigation();
 
-  let recipe = {
-    category: 1,
-    name: "RecetteTest",
-    durationHours: 1,
-    durationMinutes: 30,
-    description:
-      "Recette test pour la nivigation distincte entre les modes de l'application",
-  };
-
-  console.log(Recipes);
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
   function handlePressed(mode) {
     if (mode === "add") {
       navigation.navigate("MainPage", { mode });
     } else {
+      let recipe = Recipes.at(getRandomInt(Recipes.length));
       navigation.navigate("MainPage", { mode, recipe });
     }
   }
 
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
+      <Text>{JSON.stringify(Recipes)}</Text>
+
       <Button
         name="ViewButton"
         color="#2C2C2C"

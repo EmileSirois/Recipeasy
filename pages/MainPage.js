@@ -4,7 +4,10 @@ import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import Field from "../components/Field.js";
 
-export default function MainPage() {
+export default function MainPage({ route }) {
+  const { mode, recipe } = route.params;
+  console.log(recipe);
+
   const options = [
     {
       id: "1",
