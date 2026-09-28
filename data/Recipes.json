@@ -28,13 +28,6 @@
     "description": "Filet de saumon grillé, mariné au citron et à l'aneth, accompagné de légumes vapeur."
   },
   {
-    "category": 4,
-    "name": "Tarte aux pommes classique",
-    "durationHours": 1,
-    "durationMinutes": 30,
-    "description": "Pâte brisée maison garnie de pommes caramélisées à la cannelle, cuite au four jusqu'à dorure."
-  },
-  {
     "category": 2,
     "name": "Soupe minestrone",
     "durationHours": 0,
@@ -54,13 +47,6 @@
     "durationHours": 0,
     "durationMinutes": 40,
     "description": "Pois chiches mijotés dans une sauce au lait de coco et épices indiennes, servis avec du riz basmati."
-  },
-  {
-    "category": 4,
-    "name": "Brownies au chocolat",
-    "durationHours": 0,
-    "durationMinutes": 50,
-    "description": "Carrés de chocolat fondant, moelleux à l'intérieur avec une croûte légèrement craquante sur le dessus."
   },
   {
     "category": 2,

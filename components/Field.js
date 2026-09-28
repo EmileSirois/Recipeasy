@@ -7,6 +7,7 @@ export default function Field(props) {
       style={[styles.textInput, props.style]}
       placeholder={props.placeholder}
       secureTextEntry={props.secureTextEntry}
+      value={props.value}
     />
   );
 }

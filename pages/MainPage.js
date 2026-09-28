@@ -1,4 +1,5 @@
 import { Text, Button, TextInput, View } from "react-native";
+import { useMemo, useState } from "react";
 import { styles } from "../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
@@ -6,9 +7,8 @@ import Field from "../components/Field.js";
 
 export default function MainPage({ route }) {
   const { mode, recipe } = route.params;
-  console.log(recipe);
 
-  const options = [
+  const options = useMemo(() => [
     {
       id: "1",
       label: "Breakfast",
@@ -24,7 +24,16 @@ export default function MainPage({ route }) {
       label: "Dinner",
       value: "3",
     },
-  ];
+  ]);
+
+  const [name, setName] = useState(recipe?.name ?? "");
+  const [description, setDescription] = useState(recipe?.description ?? "");
+  const [hours, setHours] = useState(recipe?.durationHours ?? 0);
+  const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
+  const [selectedId, setSelectedId] = useState(
+    recipe ? String(recipe.category) : undefined,
+  );
+  const [isEdit, setIsEdit] = useState(mode === "edit");
 
   return (
     <View name="MainView" style={[styles.centerBox, styles.recipeContainer]}>
@@ -33,25 +42,39 @@ export default function MainPage({ route }) {
         name="MealTypeGroup"
         radioButtons={options}
         layout="row"
+        onPress={setSelectedId}
+        selectedId={selectedId}
       />
 
       <View name="NameInputView" style={{ flex: 1 }}>
-        <Field placeholder="Name" />
+        <Field placeholder="Name" value={name} onChangeText={setName} />
       </View>
 
       <View name="DurationView" style={[styles.durationPicker]}>
         <Text style={{ flex: 1 }}>Duration</Text>
 
-        <Picker name="DurationHoursPicker" style={{ flex: 3 }}>
-          <Picker.Item label="0h" value="1" />
-          <Picker.Item label="1h" value="2" />
+        <Picker
+          value={hours}
+          onValueChange={setHours}
+          name="DurationHoursPicker"
+          style={{ flex: 3 }}
+        >
+          {Array.from({ length: 13 }, (_, i) => {
+            return <Picker.Item key={i} label={`${i}h`} value={i} />;
+          })}
         </Picker>
 
         <Text style={{ flex: 1 }}>:</Text>
 
-        <Picker name="DurationMinutesPicker" style={{ flex: 3 }}>
-          <Picker.Item label="0min" value="1" />
-          <Picker.Item label="1min" value="2" />
+        <Picker
+          value={minutes}
+          onValueChange={setMinutes}
+          name="DurationMinutesPicker"
+          style={{ flex: 3 }}
+        >
+          {Array.from({ length: 60 }, (_, i) => {
+            return <Picker.Item key={i} label={`${i}min`} value={i} />;
+          })}
         </Picker>
       </View>
 
@@ -61,10 +84,13 @@ export default function MainPage({ route }) {
           textAlignVertical="top"
           placeholder="Description"
           multiline={true}
+          value={description}
+          onChangeText={setDescription}
         />
       </View>
 
-      <Button name="SaveButton" color="black" title="Save" />
+      {!isEdit && <Button name="SaveButton" color="black" title="Save" />}
+      {isEdit && <Button name="DeleteButton" color="black" title="Delete" />}
     </View>
   );
 }
