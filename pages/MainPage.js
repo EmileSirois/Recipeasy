@@ -3,9 +3,10 @@ import { useMemo, useState } from "react";
 import { styles } from "../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
+import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../components/Field.js";
 
-export default function MainPage({ route }) {
+export default function MainPage({ navigation, route }) {
   const { mode, recipe } = route.params;
 
   const options = useMemo(() => [
@@ -33,7 +34,37 @@ export default function MainPage({ route }) {
   const [selectedId, setSelectedId] = useState(
     recipe ? String(recipe.category) : undefined,
   );
-  const [isEdit, setIsEdit] = useState(mode === "edit");
+  let isEdit = mode === "edit";
+
+  function handleDelete() {
+    navigation.replace("ListPage");
+  }
+
+  function handleSave() {
+    // check si les données sont valides
+    let errorString = "";
+
+    if (!selectedId) {
+      errorString += "Catégorie non séléctionnée \n";
+      console.log("pas de categorie");
+    }
+    if (!name) {
+      errorString += "Nom requis \n";
+    }
+    if (hours == 0 && minutes == 0) {
+      errorString += "Durée suppérieur à 0 requise \n";
+    }
+    if (!description) {
+      errorString += "Description Requise \n";
+    }
+
+    if (errorString) {
+      Toast.error(errorString);
+    } else {
+      Toast.success("Enrigestrement valide");
+      navigation.navigate("ListPage");
+    }
+  }
 
   return (
     <View name="MainView" style={[styles.centerBox, styles.recipeContainer]}>
@@ -89,8 +120,23 @@ export default function MainPage({ route }) {
         />
       </View>
 
-      {!isEdit && <Button name="SaveButton" color="black" title="Save" />}
-      {isEdit && <Button name="DeleteButton" color="black" title="Delete" />}
+      {!isEdit && (
+        <Button
+          name="SaveButton"
+          color="black"
+          title="Save"
+          onPress={handleSave}
+        />
+      )}
+      {isEdit && (
+        <Button
+          name="DeleteButton"
+          color="black"
+          title="Delete"
+          onPress={handleDelete}
+        />
+      )}
+      <ToastManager />
     </View>
   );
 }

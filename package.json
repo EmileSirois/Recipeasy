@@ -14,7 +14,8 @@
     "react-native-radio-buttons-group": "^3.1.0",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
-    "react-native-web": "^0.21.2"
+    "react-native-web": "^0.21.2",
+    "toastify-react-native": "^7.2.3"
   },
   "scripts": {
     "start": "expo start",
