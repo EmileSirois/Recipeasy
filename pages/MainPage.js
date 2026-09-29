@@ -27,7 +27,7 @@ export default function MainPage({ navigation, route }) {
     },
   ]);
 
-  const [name, setName] = useState(recipe?.name ?? "");
+  const name = recipe?.name ?? "";
   const [description, setDescription] = useState(recipe?.description ?? "");
   const [hours, setHours] = useState(recipe?.durationHours ?? 0);
   const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
@@ -78,7 +78,7 @@ export default function MainPage({ navigation, route }) {
       />
 
       <View name="NameInputView" style={{ flex: 1 }}>
-        <Field placeholder="Name" value={name} onChangeText={setName} />
+        <Field placeholder="Name" value={name} />
       </View>
 
       <View name="DurationView" style={[styles.durationPicker]}>
