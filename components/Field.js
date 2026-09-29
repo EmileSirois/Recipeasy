@@ -8,6 +8,7 @@ export default function Field(props) {
       placeholder={props.placeholder}
       secureTextEntry={props.secureTextEntry}
       value={props.value}
+      onChangeText={props.onChangeText}
     />
   );
 }

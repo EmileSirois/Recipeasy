@@ -9,52 +9,44 @@ import Field from "../components/Field.js";
 export default function MainPage({ navigation, route }) {
   const { mode, recipe } = route.params;
 
-  const options = useMemo(() => [
-    {
-      id: "1",
-      label: "Breakfast",
-      value: "1",
-    },
-    {
-      id: "2",
-      label: "Lunch",
-      value: "2",
-    },
-    {
-      id: "3",
-      label: "Dinner",
-      value: "3",
-    },
-  ]);
+  let options = ["Breakfast", "Lunch", "Dinner"].map((l, index) => ({
+    id: index + 1,
+    label: l,
+    value: index + 1,
+  }));
 
-  const name = recipe?.name ?? "";
-  const [description, setDescription] = useState(recipe?.description ?? "");
-  const [hours, setHours] = useState(recipe?.durationHours ?? 0);
-  const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
-  const [selectedId, setSelectedId] = useState(
-    recipe ? String(recipe.category) : undefined,
-  );
-  let isEdit = mode === "edit";
+  const isEdit = mode === "edit";
+
+  const [form, setForm] = useState({
+    name: "",
+    category: 0,
+    durationHours: 0,
+    durationMinutes: 0,
+    description: "",
+    ...recipe,
+  });
+
+  console.log(form);
 
   function handleDelete() {
-    navigation.replace("ListPage");
+    navigation.navigate("ListPage");
   }
 
   function handleSave() {
     // check si les données sont valides
     let errorString = "";
 
-    if (!selectedId) {
+    if (form.category === 0) {
       errorString += "Catégorie non séléctionnée \n";
       console.log("pas de categorie");
     }
-    if (!name) {
+    if (!form.name) {
       errorString += "Nom requis \n";
     }
-    if (hours == 0 && minutes == 0) {
+    if (form.durationHours === 0 && form.durationMinutes === 0) {
       errorString += "Durée suppérieur à 0 requise \n";
     }
-    if (!description) {
+    if (!form.description) {
       errorString += "Description Requise \n";
     }
 
@@ -62,7 +54,15 @@ export default function MainPage({ navigation, route }) {
       Toast.error(errorString);
     } else {
       Toast.success("Enrigestrement valide");
-      navigation.navigate("ListPage");
+      const updated = {
+        ...recipe,
+        name,
+        category,
+        durationHours,
+        durationMinutes,
+        description,
+      };
+      navigation.navigate("ListPage", { updatedRecipe: updated });
     }
   }
 
@@ -73,20 +73,26 @@ export default function MainPage({ navigation, route }) {
         name="MealTypeGroup"
         radioButtons={options}
         layout="row"
-        onPress={setSelectedId}
-        selectedId={selectedId}
+        onPress={(selected) => setForm({ ...form, category: selected })}
+        selectedId={form.category}
       />
 
       <View name="NameInputView" style={{ flex: 1 }}>
-        <Field placeholder="Name" value={name} />
+        <Field
+          placeholder="Name"
+          value={form.name}
+          onChangeText={(text) => setForm({ ...form, name: text })}
+        />
       </View>
 
       <View name="DurationView" style={[styles.durationPicker]}>
         <Text style={{ flex: 1 }}>Duration</Text>
 
         <Picker
-          value={hours}
-          onValueChange={setHours}
+          value={form.durationHours}
+          onValueChange={(selected) =>
+            setForm({ ...form, durationHours: selected })
+          }
           name="DurationHoursPicker"
           style={{ flex: 3 }}
         >
@@ -98,8 +104,10 @@ export default function MainPage({ navigation, route }) {
         <Text style={{ flex: 1 }}>:</Text>
 
         <Picker
-          value={minutes}
-          onValueChange={setMinutes}
+          value={form.durationMinutes}
+          onValueChange={(selected) =>
+            setForm({ ...form, durationMinutes: selected })
+          }
           name="DurationMinutesPicker"
           style={{ flex: 3 }}
         >
@@ -115,8 +123,8 @@ export default function MainPage({ navigation, route }) {
           textAlignVertical="top"
           placeholder="Description"
           multiline={true}
-          value={description}
-          onChangeText={setDescription}
+          value={form.description}
+          onChangeText={(text) => setForm({ ...form, description: text })}
         />
       </View>
 

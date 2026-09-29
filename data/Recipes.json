@@ -1,13 +1,13 @@
 [
   {
-    "category": 1,
+    "category": 3,
     "name": "Poulet au beurre à l'ail",
     "durationHours": 0,
     "durationMinutes": 35,
     "description": "Poitrines de poulet poêlées dans une sauce crémeuse au beurre, ail et fines herbes, servies avec du riz."
   },
   {
-    "category": 2,
+    "category": 3,
     "name": "Salade César maison",
     "durationHours": 0,
     "durationMinutes": 20,
@@ -21,7 +21,7 @@
     "description": "Mijoté de bœuf haché, haricots rouges et tomates, relevé aux épices mexicaines et servi avec du pain."
   },
   {
-    "category": 1,
+    "category": 3,
     "name": "Saumon grillé au citron",
     "durationHours": 0,
     "durationMinutes": 25,
@@ -42,14 +42,14 @@
     "description": "Spaghettis enrobés d'une sauce crémeuse aux œufs, parmesan et lardons croustillants."
   },
   {
-    "category": 1,
+    "category": 3,
     "name": "Curry de pois chiches",
     "durationHours": 0,
     "durationMinutes": 40,
     "description": "Pois chiches mijotés dans une sauce au lait de coco et épices indiennes, servis avec du riz basmati."
   },
   {
-    "category": 2,
+    "category": 3,
     "name": "Bol de riz aux légumes sautés",
     "durationHours": 0,
     "durationMinutes": 30,
