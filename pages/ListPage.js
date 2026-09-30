@@ -4,8 +4,10 @@ import { useNavigation } from "@react-navigation/native";
 import Field from "../components/Field.js";
 import Recipes from "../data/Recipes.json";
 
-export default function ListPage() {
-  const navigation = useNavigation();
+export default function ListPage({ navigation, route }) {
+  // const { updatedRecipe } = route.params;
+
+  console.log(route.params);
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);

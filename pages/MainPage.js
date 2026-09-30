@@ -26,8 +26,6 @@ export default function MainPage({ navigation, route }) {
     ...recipe,
   });
 
-  console.log(form);
-
   function handleDelete() {
     navigation.navigate("ListPage");
   }
@@ -56,11 +54,7 @@ export default function MainPage({ navigation, route }) {
       Toast.success("Enrigestrement valide");
       const updated = {
         ...recipe,
-        name,
-        category,
-        durationHours,
-        durationMinutes,
-        description,
+        ...form,
       };
       navigation.navigate("ListPage", { updatedRecipe: updated });
     }
