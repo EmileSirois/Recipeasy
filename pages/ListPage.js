@@ -1,13 +1,11 @@
-import { Text, Button, View } from "react-native";
+import { Text, Button, View, Pressable } from "react-native";
 import { styles } from "../style/Styles.js";
-import { useNavigation } from "@react-navigation/native";
-import Field from "../components/Field.js";
 import Recipes from "../data/Recipes.json";
 
 export default function ListPage({ navigation, route }) {
-  // const { updatedRecipe } = route.params;
+  const { updatedRecipe } = route?.params ?? {};
 
-  console.log(route.params);
+  console.log(updatedRecipe);
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -32,7 +30,7 @@ export default function ListPage({ navigation, route }) {
         title="View"
         onPress={() => handlePressed("edit")} // dirige l'utilisatuer sur une recette random en mode edit
       />
-      <Button
+      <Pressable
         name="AddButton"
         color="#2C2C2C"
         title="Add"

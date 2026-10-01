@@ -125,7 +125,7 @@ export default function MainPage({ navigation, route }) {
       {!isEdit && (
         <Button
           name="SaveButton"
-          color="black"
+          color="#2C2C2C"
           title="Save"
           onPress={handleSave}
         />
@@ -133,7 +133,7 @@ export default function MainPage({ navigation, route }) {
       {isEdit && (
         <Button
           name="DeleteButton"
-          color="black"
+          color="#2C2C2C"
           title="Delete"
           onPress={handleDelete}
         />

@@ -2,13 +2,22 @@ import { Button, View } from "react-native";
 import { styles } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
-export default function SignUpPage() {
+export default function SignUpPage({ navigation }) {
+  function handlePressed(props) {
+    navigation.navigate(props);
+  }
+
   return (
     <View name="SignUpView" style={[styles.formContainer, styles.centerBox]}>
       <Field placeholder="Username" />
       <Field placeholder="Password" secureTextEntry={true} />
       <Field placeholder="Password Confirmation" secureTextEntry={true} />
-      <Button name="CreateAccountButton" color="black" title="Create Account" />
+      <Button
+        name="CreateAccountButton"
+        color="#2C2C2C"
+        title="Create Account"
+        onPress={() => handlePressed("ListPage")}
+      />
     </View>
   );
 }
