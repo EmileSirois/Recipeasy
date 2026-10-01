@@ -7,6 +7,12 @@ export default function ListPage({ navigation, route }) {
 
   console.log(updatedRecipe);
 
+  if (updatedRecipe) {
+    Recipes.push(updatedRecipe); // ajoute la recette mise à jour à la liste des recettes
+  }
+
+  Recipes.sort((a, b) => a.name.localeCompare(b.name)); // tri les recettes par ordre alphabétique
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -30,7 +36,7 @@ export default function ListPage({ navigation, route }) {
         title="View"
         onPress={() => handlePressed("edit")} // dirige l'utilisatuer sur une recette random en mode edit
       />
-      <Pressable
+      <Button
         name="AddButton"
         color="#2C2C2C"
         title="Add"
