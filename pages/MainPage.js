@@ -1,5 +1,5 @@
 import { Text, Button, TextInput, View } from "react-native";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { styles } from "../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
@@ -32,24 +32,21 @@ export default function MainPage({ navigation, route }) {
 
   function handleSave() {
     // check si les données sont valides
-    let errorString = "";
+    let errorLog = [];
 
     if (form.category === 0) {
-      errorString += "Catégorie non séléctionnée \n";
+      errorLog.push("Catégorie non séléctionnée");
       console.log("pas de categorie");
     }
     if (!form.name) {
-      errorString += "Nom requis \n";
+      errorLog.push("Nom requis");
     }
     if (form.durationHours === 0 && form.durationMinutes === 0) {
-      errorString += "Durée suppérieur à 0 requise \n";
-    }
-    if (!form.description) {
-      errorString += "Description Requise \n";
+      errorLog.push("Durée suppérieur à 0 requise");
     }
 
-    if (errorString) {
-      Toast.error(errorString);
+    if (errorLog.length > 0) {
+      Toast.error(errorLog.join("\n"));
     } else {
       Toast.success("Enrigestrement valide");
       const updated = {
@@ -80,7 +77,7 @@ export default function MainPage({ navigation, route }) {
       </View>
 
       <View name="DurationView" style={[styles.durationPicker]}>
-        <Text style={{ flex: 1 }}>Duration</Text>
+        <Text style={{ flex: 2 }}>Duration</Text>
 
         <Picker
           value={form.durationHours}
