@@ -1,15 +1,16 @@
 import { Text, Button, View, Pressable } from "react-native";
 import { styles } from "../style/Styles.js";
+import { useState, useEffect } from "react";
 import Recipes from "../data/Recipes.json";
 
 export default function ListPage({ navigation, route }) {
-  const { updatedRecipe } = route?.params ?? {};
+  const [recipes, setRecipes] = useState(Recipes); // initialise l'état des recettes avec les données importées
 
-  var recipes = [...Recipes]; // copie la liste des recettes pour éviter de modifier l'original
-
-  if (updatedRecipe) {
-    recipes.push(updatedRecipe); // ajoute la recette mise à jour à la liste des recettes
-  }
+  useEffect(() => {
+    if (route.params?.updatedRecipe) {
+      setRecipes([...recipes, route.params.updatedRecipe]);
+    }
+  }, [route.params?.updatedRecipe]);
 
   const sortedRecipes = [...recipes].sort((a, b) =>
     a.name.localeCompare(b.name),
