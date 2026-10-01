@@ -5,13 +5,15 @@ import Recipes from "../data/Recipes.json";
 export default function ListPage({ navigation, route }) {
   const { updatedRecipe } = route?.params ?? {};
 
-  console.log(updatedRecipe);
+  var recipes = [...Recipes]; // copie la liste des recettes pour éviter de modifier l'original
 
   if (updatedRecipe) {
-    Recipes.push(updatedRecipe); // ajoute la recette mise à jour à la liste des recettes
+    recipes.push(updatedRecipe); // ajoute la recette mise à jour à la liste des recettes
   }
 
-  Recipes.sort((a, b) => a.name.localeCompare(b.name)); // tri les recettes par ordre alphabétique
+  const sortedRecipes = [...recipes].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  ); // tri les recettes par ordre alphabétique
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -21,14 +23,14 @@ export default function ListPage({ navigation, route }) {
     if (mode === "add") {
       navigation.navigate("MainPage", { mode });
     } else {
-      let recipe = Recipes.at(getRandomInt(Recipes.length));
+      let recipe = sortedRecipes.at(getRandomInt(sortedRecipes.length));
       navigation.navigate("MainPage", { mode, recipe });
     }
   }
 
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
-      <Text>{JSON.stringify(Recipes)}</Text>
+      <Text>{JSON.stringify(sortedRecipes)}</Text>
 
       <Button
         name="ViewButton"
