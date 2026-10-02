@@ -1,4 +1,4 @@
-import { Text, Button, View, Pressable } from "react-native";
+import { Text, Button, View } from "react-native";
 import { styles } from "../style/Styles.js";
 import { useState, useEffect } from "react";
 import Recipes from "../data/Recipes.json";

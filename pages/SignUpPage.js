@@ -4,7 +4,7 @@ import Field from "../components/Field.js";
 
 export default function SignUpPage({ navigation }) {
   function handlePressed(props) {
-    navigation.navigate(props);
+    navigation.replace(props);
   }
 
   return (

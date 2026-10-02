@@ -8,7 +8,7 @@ export default function LoginPage({ navigation }) {
   }
 
   function handleSignUp() {
-    navigation.navigate("SignUpPage");
+    navigation.navigate("SignUpPage"); 
   }
 
   return (

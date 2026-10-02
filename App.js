@@ -1,4 +1,3 @@
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { styles } from "./style/Styles.js";
@@ -36,10 +35,10 @@ export default function App() {
               <Button
                 title="Log out"
                 color="#77716C"
-                onPress={() => navigation.replace("LoginPage")}
+                onPress={() => navigation.popTo("LoginPage")} //si le premier screen de la stack est tjrs login, poptotop?
               />
             ),
-            headerBackVisible: false,
+            headerBackVisible: false, //potentiellement redondant si la stack est bien fait
           })}
         />
       </Stack.Navigator>
