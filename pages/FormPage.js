@@ -7,7 +7,7 @@ import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../components/Field.js";
 
 export default function MainPage({ navigation, route }) {
-  const { mode, recipe } = route.params;
+  const { recipe } = route.params;
 
   let options = ["Breakfast", "Lunch", "Dinner"].map((l, index) => ({
     id: index + 1,
@@ -15,7 +15,7 @@ export default function MainPage({ navigation, route }) {
     value: index + 1,
   }));
 
-  const isEdit = mode === "edit";
+  const isEdit = recipe !== undefined;
 
   const [form, setForm] = useState({
     name: "",

@@ -21,7 +21,7 @@ export default function ListPage({ navigation, route }) {
   }
 
   function handleAdd() {
-    navigation.navigate("FormPage");
+    navigation.navigate("FormPage", {});
   }
 
   function handleView() {
