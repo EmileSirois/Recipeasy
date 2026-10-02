@@ -20,13 +20,13 @@ export default function ListPage({ navigation, route }) {
     return Math.floor(Math.random() * max);
   }
 
-  function handlePressed(mode) {
-    if (mode === "add") {
-      navigation.navigate("MainPage", { mode });
-    } else {
-      let recipe = sortedRecipes.at(getRandomInt(sortedRecipes.length));
-      navigation.navigate("MainPage", { mode, recipe });
-    }
+  function handleAdd() {
+    navigation.navigate("FormPage");
+  }
+
+  function handleView() {
+    let recipe = sortedRecipes.at(getRandomInt(sortedRecipes.length));
+    navigation.navigate("FormPage", { recipe });
   }
 
   return (
@@ -37,13 +37,13 @@ export default function ListPage({ navigation, route }) {
         name="ViewButton"
         color="#2C2C2C"
         title="View"
-        onPress={() => handlePressed("edit")} // dirige l'utilisatuer sur une recette random en mode edit
+        onPress={() => handleView()} // dirige l'utilisatuer sur une recette random en mode edit
       />
       <Button
         name="AddButton"
         color="#2C2C2C"
         title="Add"
-        onPress={() => handlePressed("add")} // dirige l'utilisatuer vers le formulaire de recette en mode add
+        onPress={() => handleAdd()} // dirige l'utilisatuer vers le formulaire de recette en mode add
       />
     </View>
   );

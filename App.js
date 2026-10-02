@@ -4,7 +4,7 @@ import { styles } from "./style/Styles.js";
 import { Button } from "react-native";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
-import MainPage from "./pages/MainPage.js";
+import FormPage from "./pages/FormPage.js";
 import ListPage from "./pages/ListPage.js";
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +26,7 @@ export default function App() {
       <Stack.Navigator style={[styles.screen]} initialRouteName="LoginPage">
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="SignUpPage" component={SignUpPage} />
-        <Stack.Screen name="MainPage" component={MainPage} />
+        <Stack.Screen name="FormPage" component={FormPage} />
         <Stack.Screen
           name="ListPage"
           component={ListPage}
