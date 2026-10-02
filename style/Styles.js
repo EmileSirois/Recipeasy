@@ -22,13 +22,6 @@ export const styles = StyleSheet.create({
     padding: 15,
     width: "100%",
   },
-  textInput: {
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 1,
-    backgroundColor: "white",
-    padding: 10,
-  },
   durationPicker: {
     flexDirection: "row",
     alignItems: "center",

@@ -109,8 +109,8 @@ export default function MainPage({ navigation, route }) {
       </View>
 
       <View name="DescriptionView" style={{ flex: 10 }}>
-        <TextInput
-          style={[styles.textInput, { flex: 1 }]}
+        <Field
+          style={{ flex: 1 }}
           textAlignVertical="top"
           placeholder="Description"
           multiline={true}

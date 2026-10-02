@@ -1,14 +1,15 @@
-import { TextInput } from "react-native";
-import { styles } from "../style/Styles.js";
+import { TextInput, StyleSheet } from "react-native";
 
-export default function Field(props) {
-  return (
-    <TextInput
-      style={[styles.textInput, props.style]}
-      placeholder={props.placeholder}
-      secureTextEntry={props.secureTextEntry}
-      value={props.value}
-      onChangeText={props.onChangeText}
-    />
-  );
+export default function Field({ style, ...otherProps }) {
+  return <TextInput style={[styles.textInput, style]} {...otherProps} />;
 }
+
+const styles = StyleSheet.create({
+  textInput: {
+    height: 50,
+    borderColor: "gray",
+    borderWidth: 1,
+    backgroundColor: "white",
+    padding: 10,
+  },
+});
