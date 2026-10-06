@@ -1,6 +1,6 @@
-import { Text, Button, TextInput, View } from "react-native";
+import { Text, Button, View } from "react-native";
 import { useState } from "react";
-import { styles } from "../style/Styles.js";
+import { styles, customTheme } from "../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import ToastManager, { Toast } from "toastify-react-native";
@@ -122,7 +122,7 @@ export default function MainPage({ navigation, route }) {
       {!isEdit && (
         <Button
           name="SaveButton"
-          color="#2C2C2C"
+          color={customTheme.colors.card}
           title="Save"
           onPress={handleSave}
         />
@@ -130,7 +130,7 @@ export default function MainPage({ navigation, route }) {
       {isEdit && (
         <Button
           name="DeleteButton"
-          color="#2C2C2C"
+          color={customTheme.colors.card}
           title="Delete"
           onPress={handleDelete}
         />

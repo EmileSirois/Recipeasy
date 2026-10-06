@@ -1,5 +1,5 @@
 import { Text, Button, View } from "react-native";
-import { styles } from "../style/Styles.js";
+import { styles, customTheme } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
 export default function LoginPage({ navigation }) {
@@ -17,7 +17,7 @@ export default function LoginPage({ navigation }) {
       <Field placeholder="Password" secureTextEntry={true} />
       <Button
         name="CreateAccountButton"
-        color="#2C2C2C"
+        color={customTheme.colors.card}
         title="Create Account"
         onPress={() => handleLogin()}
       />
@@ -29,7 +29,7 @@ export default function LoginPage({ navigation }) {
         <Text
           name="SignUpLink"
           style={{
-            color: "#2C2C2C",
+            color: customTheme.colors.card,
             textDecorationLine: "underline",
             fontSize: 15,
           }}

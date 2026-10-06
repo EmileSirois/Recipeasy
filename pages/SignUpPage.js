@@ -1,5 +1,5 @@
 import { Button, View } from "react-native";
-import { styles } from "../style/Styles.js";
+import { styles, customTheme } from "../style/Styles.js";
 import Field from "../components/Field.js";
 
 export default function SignUpPage({ navigation }) {
@@ -14,7 +14,7 @@ export default function SignUpPage({ navigation }) {
       <Field placeholder="Password Confirmation" secureTextEntry={true} />
       <Button
         name="CreateAccountButton"
-        color="#2C2C2C"
+        color={customTheme.colors.card}
         title="Create Account"
         onPress={() => handlePressed("ListPage")}
       />

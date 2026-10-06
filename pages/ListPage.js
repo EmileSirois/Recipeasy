@@ -1,5 +1,5 @@
 import { Text, Button, View } from "react-native";
-import { styles } from "../style/Styles.js";
+import { styles, customTheme } from "../style/Styles.js";
 import { useState, useEffect } from "react";
 import Recipes from "../data/Recipes.json";
 
@@ -35,13 +35,13 @@ export default function ListPage({ navigation, route }) {
 
       <Button
         name="ViewButton"
-        color="#2C2C2C"
+        color={customTheme.colors.card}
         title="View"
         onPress={() => handleView()} // dirige l'utilisatuer sur une recette random en mode edit
       />
       <Button
         name="AddButton"
-        color="#2C2C2C"
+        color={customTheme.colors.card}
         title="Add"
         onPress={() => handleAdd()} // dirige l'utilisatuer vers le formulaire de recette en mode add
       />

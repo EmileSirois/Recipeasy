@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { DefaultTheme } from "@react-navigation/native";
 
 export const styles = StyleSheet.create({
   screen: {
@@ -28,3 +29,14 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+
+export const customTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#F5F5F5", // gris presque blanc pour le fond des écrans
+    card: "#2C2C2C", // fond de l'entête (header/tab bar)
+    text: "#FFFFFF", // texte clair pour contraster avec l'entête foncée
+    border: "#2C2C2C", // pour que la bordure de l'entête matche
+  },
+};
