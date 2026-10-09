@@ -18,7 +18,7 @@ export default function LoginPage({ navigation }) {
       <Button
         name="CreateAccountButton"
         color={customTheme.colors.card}
-        title="Create Account"
+        title="Login"
         onPress={() => handleLogin()}
       />
 

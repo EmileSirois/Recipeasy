@@ -28,6 +28,17 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  item: {
+    flex: 1,
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#ccc",
+    marginHorizontal: 16,
+  },
 });
 
 export const customTheme = {
