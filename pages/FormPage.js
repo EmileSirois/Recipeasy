@@ -1,4 +1,4 @@
-import { Text, Button, View } from "react-native";
+import { Text, Button, View, Pressable } from "react-native";
 import { useState } from "react";
 import { styles, customTheme } from "../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
@@ -6,7 +6,7 @@ import { Picker } from "@react-native-picker/picker";
 import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../components/Field.js";
 
-export default function MainPage({ navigation, route }) {
+export default function FormPage({ navigation, route }) {
   const { recipe = {} } = route.params ?? {};
 
   let options = ["Breakfast", "Lunch", "Dinner"].map((l, index) => ({
@@ -15,7 +15,7 @@ export default function MainPage({ navigation, route }) {
     value: index + 1,
   }));
 
-  const isEdit = recipe !== undefined;
+  const isEmpty = Object.keys(recipe).length === 0; // switch boutons
 
   const [form, setForm] = useState({
     name: "",
@@ -119,22 +119,30 @@ export default function MainPage({ navigation, route }) {
         />
       </View>
 
-      {!isEdit && (
-        <Button
-          name="SaveButton"
-          color={customTheme.colors.card}
-          title="Save"
+      {isEmpty && (
+        <Pressable
           onPress={handleSave}
-        />
+          accessibilityRole="button"
+          style={({ pressed }) => [
+            styles.button,
+            styles.saveButton,
+            pressed && { opacity: 0.6 },
+          ]}>
+          <Text style={styles.saveText}>Save</Text>
+        </Pressable>
       )}
-      {isEdit && (
-        <Button
-          name="DeleteButton"
-          color={customTheme.colors.card}
-          title="Delete"
+      {!isEmpty && (
+        <Pressable
           onPress={handleDelete}
-        />
+          accessibilityRole="button"
+          style={({ pressed }) => [
+            styles.deleteButton,
+            pressed && { opacity: 0.6 },
+          ]}>
+          <Text style={styles.deleteText}>isEdit</Text>
+        </Pressable>
       )}
+
       <ToastManager />
     </View>
   );

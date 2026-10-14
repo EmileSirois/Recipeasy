@@ -13,9 +13,13 @@ export const customTheme = {
 };
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   screen: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -29,13 +33,11 @@ export const styles = StyleSheet.create({
   formContainer: {
     gap: 20,
     padding: 50,
-    width: "100%",
   },
   recipeContainer: {
     flex: 1,
     gap: 15,
     padding: 15,
-    width: "100%",
   },
   durationPicker: {
     flexDirection: "row",
@@ -50,7 +52,7 @@ export const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: customTheme.colors.border,
     marginHorizontal: 16,
   },
   logOutBtn: {
@@ -61,6 +63,45 @@ export const styles = StyleSheet.create({
     color: customTheme.colors.card,
     padding: 10,
     fontWeight: "bold",
+  },
+  // deleteButton: {
+  //   backgroundColor: customTheme.colors.background,
+  //   padding: 10,
+  //   alignItems: "center",
+  //   borderRadius: 3,
+  //   borderWidth: 2,
+  //   borderColor: "red",
+  // },
+  // deleteText: {
+  //   color: "red",
+  //   fontWeight: "bold",
+  // },
+  button: {
+    borderWidth: 2,
+    borderRadius: 6,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    alignItems: "center",
+  },
+  saveButton: {
+    backgroundColor: customTheme.colors.card,
+    borderColor: customTheme.colors.border,
+  },
+  saveText: {
+    color: customTheme.colors.text,
+    fontWeight: "600",
+  },
+  deleteButton: {
+    backgroundColor: customTheme.colors.background,
+    padding: 10,
+    alignItems: "center",
+    borderRadius: 3,
+    borderWidth: 2,
+    borderColor: "red",
+  },
+  deleteText: {
+    color: "red",
+    fontWeight: "600",
   },
 });
 

@@ -28,11 +28,11 @@ const Item = ({id, category, name, durationHours, durationMinutes, description, 
   </Pressable>
 );
 
-const Separator = () => <View style={ItemStyles.separator} />;
+const Separator = () => <View style={styles.separator} />;
 
 const emptyListMessage = () => (
-  <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-    <Text style={{fontSize: 18, color: "#888"}}>No recipes available.</Text>
+  <View style={styles.container}>
+    <Text style={ItemStyles.emptyListMessage}>No recipes available.</Text>
   </View>
 );
 
@@ -99,7 +99,10 @@ const ItemStyles = StyleSheet.create({
     backgroundColor: "white" 
   },
   itemPressed: { 
-    backgroundColor: "#eee" ,
     opacity: 0.5
+  },
+  emptyListMessage: {
+    fontSize: 16,
+    color: customTheme.colors.card,
   },
 });
