@@ -1,7 +1,7 @@
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { styles, customTheme } from "./style/Styles.js";
-import { Button } from "react-native";
+import { Pressable, Text } from "react-native";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
 import FormPage from "./pages/FormPage.js";
@@ -21,11 +21,9 @@ export default function App() {
           component={ListPage}
           options={({ navigation }) => ({
             headerRight: () => (
-              <Button
-                title="Log out"
-                color={customTheme.colors.background}
-                onPress={() => navigation.popTo("LoginPage")} //si le premier screen de la stack est tjrs login, poptotop?
-              />
+              <Pressable style={styles.logOutBtn} onPress={() => navigation.popTo("LoginPage")}>
+                <Text style={styles.logOutBtnText}>LOG OUT</Text>
+              </Pressable>
             ),
             headerBackVisible: false, //potentiellement redondant si la stack est bien fait
           })}

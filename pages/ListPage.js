@@ -43,10 +43,6 @@ export default function ListPage({ navigation, route }) {
     </View>
   );
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
   function handleAdd() {
     navigation.navigate("FormPage", {});
   }
@@ -58,7 +54,6 @@ export default function ListPage({ navigation, route }) {
 
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
-      {/* <Text>{JSON.stringify(sortedRecipes)}</Text> */}
       <FlatList
         data={sortedRecipes}
         renderItem={({item}) => <Item {...item} />}

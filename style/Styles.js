@@ -1,6 +1,17 @@
 import { StyleSheet } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 
+export const customTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#F5F5F5", // gris presque blanc pour le fond des écrans
+    card: "#2C2C2C", // fond de l'entête (header/tab bar)
+    text: "#FFFFFF", // texte clair pour contraster avec l'entête foncée
+    border: "#2C2C2C", // pour que la bordure de l'entête matche
+  },
+};
+
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -39,15 +50,14 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     marginHorizontal: 16,
   },
+  logOutBtn: {
+    marginRight: 10, 
+    backgroundColor: customTheme.colors.background
+  },
+  logOutBtnText: {
+    color: customTheme.colors.card,
+    padding: 10,
+    fontWeight: "bold",
+  },
 });
 
-export const customTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: "#F5F5F5", // gris presque blanc pour le fond des écrans
-    card: "#2C2C2C", // fond de l'entête (header/tab bar)
-    text: "#FFFFFF", // texte clair pour contraster avec l'entête foncée
-    border: "#2C2C2C", // pour que la bordure de l'entête matche
-  },
-};
