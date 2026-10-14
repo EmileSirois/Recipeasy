@@ -7,7 +7,7 @@ import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../components/Field.js";
 
 export default function MainPage({ navigation, route }) {
-  const { recipe } = route.params;
+  const { recipe = {} } = route.params ?? {};
 
   let options = ["Breakfast", "Lunch", "Dinner"].map((l, index) => ({
     id: index + 1,

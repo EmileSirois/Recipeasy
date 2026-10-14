@@ -3,6 +3,39 @@ import { styles, customTheme } from "../style/Styles.js";
 import { useState, useEffect } from "react";
 import Recipes from "../data/Recipes.json";
 
+const Item = ({id, category, name, durationHours, durationMinutes, description, onPress }) => (
+  <Pressable style={({ pressed }) => [
+      styles.item,
+      pressed && ItemStyles.itemPressed,
+    ]} 
+    onPress = {onPress}>
+
+    <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
+      <Text style={ItemStyles.category}>{category}</Text>
+      <Text style={ItemStyles.title}>{name}</Text>
+    </View>
+
+    <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
+      <Text style={ItemStyles.duration}>{durationHours}h {durationMinutes}min</Text>
+      <Text 
+        style={ItemStyles.description} 
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        {description}
+      </Text>
+    </View>
+  </Pressable>
+);
+
+const Separator = () => <View style={ItemStyles.separator} />;
+
+const emptyListMessage = () => (
+  <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+    <Text style={{fontSize: 18, color: "#888"}}>No recipes available.</Text>
+  </View>
+);
+
 export default function ListPage({ navigation, route }) {
   const [recipes, setRecipes] = useState(Recipes); // initialise l'état des recettes avec les données importées
 
@@ -16,41 +49,8 @@ export default function ListPage({ navigation, route }) {
     a.name.localeCompare(b.name),
   ); // tri les recettes par ordre alphabétique
 
-  const Item = ({id, category, name, durationHours, durationMinutes, description }) => (
-    <Pressable style={({ pressed }) => [
-        styles.item,
-        pressed && ItemStyles.itemPressed,
-      ]} 
-      onPress = {() => handleListPress(id)}>
-
-      <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
-        <Text style={ItemStyles.category}>{category}</Text>
-        <Text style={ItemStyles.title}>{name}</Text>
-      </View>
-
-      <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
-        <Text style={ItemStyles.duration}>{durationHours}h {durationMinutes}min</Text>
-        <Text 
-          style={ItemStyles.description} 
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {description}
-        </Text>
-      </View>
-    </Pressable>
-  );
-  
-  const Separator = () => <View style={ItemStyles.separator} />;
-
-  const emptyListMessage = () => (
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text style={{fontSize: 18, color: "#888"}}>No recipes available.</Text>
-    </View>
-  );
-
   function handleAdd() {
-    navigation.navigate("FormPage", {});
+    navigation.navigate("FormPage");
   }
 
   function handleListPress(id) {
@@ -62,7 +62,7 @@ export default function ListPage({ navigation, route }) {
     <View name="LoginView" style={[styles.listContainer, styles.centerBox]}>
       <FlatList
         data={sortedRecipes}
-        renderItem={({item}) => <Item {...item} />}
+        renderItem={({item}) => <Item {...item} onPress={() => handleListPress(item.id)} />}
         keyExtractor={item => String(item.id)}
         ItemSeparatorComponent={Separator}
         ListEmptyComponent={emptyListMessage}
