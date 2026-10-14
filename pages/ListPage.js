@@ -53,7 +53,7 @@ export default function ListPage({ navigation, route }) {
   }
 
   return (
-    <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
+    <View name="LoginView" style={[styles.listContainer, styles.centerBox]}>
       <FlatList
         data={sortedRecipes}
         renderItem={({item}) => <Item {...item} />}
