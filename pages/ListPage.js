@@ -30,7 +30,13 @@ export default function ListPage({ navigation, route }) {
 
       <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
         <Text style={ItemStyles.duration}>{durationHours}h {durationMinutes}min</Text>
-        <Text style={ItemStyles.description}>{description}</Text>
+        <Text 
+          style={ItemStyles.description} 
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {description}
+        </Text>
       </View>
     </Pressable>
   );
