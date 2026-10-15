@@ -1,18 +1,20 @@
 import User from '../models/user.js'
+import { MARTHA_URL, MARTHA_AUTH } from "../config/config.js";
 
 export class AuthService {
     #currentUser = null // ATTENTION, à utiliser judicieusement
+    
 
     get currentUser() {
         return this.#currentUser
     }
 
     async signUp(credentials) {
-        const response = await fetch("http://martha.jh.shawinigan.info/queries/insert-user/execute", {
+        const response = await fetch(`${MARTHA_URL}/insert-user/execute`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: {
-                'auth': 'ZGVtbzpSZWFjdE5hdGl2ZTIwMjQh'
+                'auth': MARTHA_AUTH
             }
         }).then((r) => r.json())
 
@@ -24,11 +26,11 @@ export class AuthService {
     }
 
     async logIn(credentials) {
-        const response = await fetch("http://martha.jh.shawinigan.info/queries/select-user-auth/execute", {
+        const response = await fetch(`${MARTHA_URL}/select-user-auth/execute`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: {
-                'auth': 'ZGVtbzpSZWFjdE5hdGl2ZTIwMjQh'
+                'auth': MARTHA_AUTH
             }
         }).then((r) => r.json())
 
@@ -40,6 +42,8 @@ export class AuthService {
         } else {
             this.#currentUser = null
         }
+
+        console.log(response)
 
         return !!this.#currentUser
     }

@@ -1,7 +1,6 @@
 import { Text, Button, View, FlatList, StyleSheet, Pressable } from "react-native";
 import { styles, customTheme } from "../../style/Styles.js";
 import { useState, useEffect } from "react";
-// import Recipes from "../../data/Recipes.json";
 import RecipeService from "../../services/recipes.js";
 
 const Item = ({id, category, name, durationHours, durationMinutes, description, onPress }) => (
@@ -38,7 +37,7 @@ const emptyListMessage = () => (
 );
 
 export default function ListPage({ navigation, route }) {
-  const [recipes, setRecipes] = useState([]); // initialise l'état des recettes avec les données importées
+  const [recipes, setRecipes] = useState([]); 
 
   useEffect(() => {
     const fetchRecipes = async () => {

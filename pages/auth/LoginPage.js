@@ -1,10 +1,23 @@
 import { Text, Button, View } from "react-native";
 import { styles, customTheme } from "../../style/Styles.js";
+import { useState } from "react";
 import Field from "../../components/Field.js";
+import User from "../../models/user.js";
+import UserCredentials from "../../models/user-credentials.js";
+import auth from '../../services/auth.js';
+
 
 export default function LoginPage({ navigation }) {
-  function handleLogin() {
-    navigation.replace("ListPage");
+  const [user, setUser] = useState()
+  const [credentials, setCredentials] = useState(new UserCredentials({username: '', password: ''}))
+
+  async function handleLogin() {
+    const success = await auth.logIn(credentials)
+
+    console.log({success, user: auth.currentUser})
+    setUser(auth.currentUser)
+
+    // navigation.replace("ListPage");
   }
 
   function handleSignUp() {
@@ -13,8 +26,8 @@ export default function LoginPage({ navigation }) {
 
   return (
     <View name="LoginView" style={[styles.formContainer, styles.centerBox]}>
-      <Field placeholder="Username" />
-      <Field placeholder="Password" secureTextEntry={true} />
+      <Field placeholder="Username"  onChangeText={ text => setCredentials(new UserCredentials({...credentials, username: text })) } />
+      <Field placeholder="Password" secureTextEntry={true} onChangeText={ text => setCredentials(new UserCredentials({...credentials, password: text })) } />
       <Button
         name="CreateAccountButton"
         color={customTheme.colors.card}

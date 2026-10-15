@@ -1,16 +1,16 @@
 import Recipe from '../models/recipe.js'
+import { MARTHA_URL, MARTHA_AUTH } from "../config/config.js";
 
 export class RecipeService {
 
     
 async getAll(userId) {
-    const AUTH = btoa("emile:0E69cf2f61802212af$8ad173");
 
-    const response = await fetch("http://martha.jh.shawinigan.info/queries/select-recipes/execute", {
+    const response = await fetch(`${MARTHA_URL}/select-recipes/execute`, {
         method: 'POST',
         body: JSON.stringify({ id: userId }),
         headers: {
-            'auth': `${AUTH}`
+            'auth': MARTHA_AUTH
         }
     }).then((r) => r.json())
 
