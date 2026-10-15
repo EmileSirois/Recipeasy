@@ -2,10 +2,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { styles, customTheme } from "./style/Styles.js";
 import { Pressable, Text } from "react-native";
-import LoginPage from "./pages/LoginPage.js";
-import SignUpPage from "./pages/SignUpPage.js";
-import FormPage from "./pages/FormPage.js";
-import ListPage from "./pages/ListPage.js";
+import LoginPage from "./pages/auth/LoginPage.js";
+import SignUpPage from "./pages/auth/SignUpPage.js";
+import FormPage from "./pages/recipes/FormPage.js";
+import ListPage from "./pages/recipes/ListPage.js";
 
 const Stack = createNativeStackNavigator();
 

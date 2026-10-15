@@ -1,7 +1,8 @@
 import { Text, Button, View, FlatList, StyleSheet, Pressable } from "react-native";
-import { styles, customTheme } from "../style/Styles.js";
+import { styles, customTheme } from "../../style/Styles.js";
 import { useState, useEffect } from "react";
-import Recipes from "../data/Recipes.json";
+// import Recipes from "../../data/Recipes.json";
+import RecipeService from "../../services/recipes.js";
 
 const Item = ({id, category, name, durationHours, durationMinutes, description, onPress }) => (
   <Pressable style={({ pressed }) => [
@@ -37,31 +38,33 @@ const emptyListMessage = () => (
 );
 
 export default function ListPage({ navigation, route }) {
-  const [recipes, setRecipes] = useState(Recipes); // initialise l'état des recettes avec les données importées
+  const [recipes, setRecipes] = useState([]); // initialise l'état des recettes avec les données importées
 
   useEffect(() => {
-    if (route.params?.updatedRecipe) {
-      setRecipes([...recipes, route.params.updatedRecipe]);
-    }
-  }, [route.params?.updatedRecipe]);
+    const fetchRecipes = async () => {
+      const userId = 1;
+      if (userId) {
+        const recipesList = await RecipeService.getAll(userId);
+        setRecipes(recipesList);
+      }
+    };
 
-  const sortedRecipes = [...recipes].sort((a, b) =>
-    a.name.localeCompare(b.name),
-  ); // tri les recettes par ordre alphabétique
+    fetchRecipes();
+  }, [route.params?.userId]);
 
   function handleAdd() {
     navigation.navigate("FormPage");
   }
 
   function handleListPress(id) {
-    let recipe = sortedRecipes.find((recipe) => recipe.id === id);
+    let recipe = recipes.find((recipe) => recipe.id === id);
     navigation.navigate("FormPage", { recipe });
   }
 
   return (
     <View name="LoginView" style={[styles.listContainer, styles.centerBox]}>
       <FlatList
-        data={sortedRecipes}
+        data={recipes}
         renderItem={({item}) => <Item {...item} onPress={() => handleListPress(item.id)} />}
         keyExtractor={item => String(item.id)}
         ItemSeparatorComponent={Separator}

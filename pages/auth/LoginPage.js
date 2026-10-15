@@ -1,6 +1,6 @@
 import { Text, Button, View } from "react-native";
-import { styles, customTheme } from "../style/Styles.js";
-import Field from "../components/Field.js";
+import { styles, customTheme } from "../../style/Styles.js";
+import Field from "../../components/Field.js";
 
 export default function LoginPage({ navigation }) {
   function handleLogin() {

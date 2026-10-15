@@ -1,10 +1,10 @@
 import { Text, Button, View, Pressable } from "react-native";
 import { useState } from "react";
-import { styles, customTheme } from "../style/Styles.js";
+import { styles, customTheme } from "../../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import ToastManager, { Toast } from "toastify-react-native";
-import Field from "../components/Field.js";
+import Field from "../../components/Field.js";
 
 export default function FormPage({ navigation, route }) {
   const { recipe = {} } = route.params ?? {};
