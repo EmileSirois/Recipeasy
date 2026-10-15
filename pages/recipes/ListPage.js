@@ -3,7 +3,7 @@ import { styles, customTheme } from "../../style/Styles.js";
 import { useState, useEffect } from "react";
 import RecipeService from "../../services/recipes.js";
 
-const Item = ({id, category, name, durationHours, durationMinutes, description, onPress }) => (
+const Item = ({id, category, name, duration_hours, duration_minutes, description, onPress }) => (
   <Pressable style={({ pressed }) => [
       styles.item,
       pressed && ItemStyles.itemPressed,
@@ -16,7 +16,7 @@ const Item = ({id, category, name, durationHours, durationMinutes, description, 
     </View>
 
     <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
-      <Text style={ItemStyles.duration}>{durationHours}h {durationMinutes}min</Text>
+      <Text style={ItemStyles.duration}>{duration_hours}h {duration_minutes}min</Text>
       <Text 
         style={ItemStyles.description} 
         numberOfLines={1}
@@ -38,10 +38,10 @@ const emptyListMessage = () => (
 
 export default function ListPage({ navigation, route }) {
   const [recipes, setRecipes] = useState([]); 
+  const userId = route.params?.userId; // Récupère l'ID de l'utilisateur depuis les paramètres de navigation
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const userId = 1;
       if (userId) {
         const recipesList = await RecipeService.getAll(userId);
         setRecipes(recipesList);
@@ -50,6 +50,8 @@ export default function ListPage({ navigation, route }) {
 
     fetchRecipes();
   }, [route.params?.userId]);
+
+  console.log(recipes);
 
   function handleAdd() {
     navigation.navigate("FormPage");
