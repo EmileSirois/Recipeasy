@@ -1,6 +1,7 @@
 import { Text, Button, View } from "react-native";
 import { styles, customTheme } from "../../style/Styles.js";
 import { useState } from "react";
+import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../../components/Field.js";
 import User from "../../models/user.js";
 import UserCredentials from "../../models/user-credentials.js";
@@ -14,10 +15,13 @@ export default function LoginPage({ navigation }) {
   async function handleLogin() {
     const success = await auth.logIn(credentials)
 
-    console.log({success, user: auth.currentUser})
     setUser(auth.currentUser)
 
-    // navigation.replace("ListPage");
+    if (success) {
+      navigation.replace("ListPage", { userId: auth.currentUser.id });
+    } else {
+      Toast.error("Invalid credentials");
+    }
   }
 
   function handleSignUp() {
@@ -51,6 +55,8 @@ export default function LoginPage({ navigation }) {
           Sign up!
         </Text>
       </View>
+
+      <ToastManager />
     </View>
   );
 }

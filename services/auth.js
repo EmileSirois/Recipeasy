@@ -38,12 +38,9 @@ export class AuthService {
             const user = response.data[0]
 
             this.#currentUser = new User({ id: user.id, username: user.username })
-            console.log(JSON.stringify(this.#currentUser))
         } else {
             this.#currentUser = null
         }
-
-        console.log(response)
 
         return !!this.#currentUser
     }
