@@ -5,6 +5,9 @@ import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../../components/Field.js";
+import recipes from "../../services/recipes.js";
+import auth from "../../services/auth.js";
+import Recipe from "../../models/recipe.js";
 
 export default function FormPage({ navigation, route }) {
   const { recipe = {} } = route.params ?? {};
@@ -20,28 +23,33 @@ export default function FormPage({ navigation, route }) {
   const [form, setForm] = useState({
     name: "",
     category: 0,
-    durationHours: 0,
-    durationMinutes: 0,
+    duration_hours: 0,
+    duration_minutes: 0,
     description: "",
     ...recipe,
   });
 
-  function handleDelete() {
-    navigation.navigate("ListPage");
+  async function handleDelete() {
+    const success = await recipes.delete(recipe.id, auth.currentUser.id);
+    if (success) {
+      navigation.replace("ListPage");
+    }
+    else{
+      Toast.error("Erreur lors de la suppression");
+    }
   }
 
-  function handleSave() {
+  async function handleSave() {
     // check si les données sont valides
     let errorLog = [];
 
     if (form.category === 0) {
       errorLog.push("Catégorie non séléctionnée");
-      console.log("pas de categorie");
     }
     if (!form.name) {
       errorLog.push("Nom requis");
     }
-    if (form.durationHours === 0 && form.durationMinutes === 0) {
+    if (form.duration_hours === 0 && form.duration_minutes === 0) {
       errorLog.push("Durée suppérieur à 0 requise");
     }
 
@@ -53,7 +61,15 @@ export default function FormPage({ navigation, route }) {
         ...recipe,
         ...form,
       };
-      navigation.navigate("ListPage", { updatedRecipe: updated });
+
+      const success = await recipes.insert(updated, auth.currentUser.id);
+      
+      if (success) {
+        navigation.replace("ListPage");
+      }
+      else{
+        Toast.error("Erreur lors de l'enregistrement");
+      }
     }
   }
 
@@ -80,11 +96,11 @@ export default function FormPage({ navigation, route }) {
         <Text style={{ flex: 2 }}>Duration</Text>
 
         <Picker
-          value={form.durationHours}
+          value={form.duration_hours}
           onValueChange={(selected) =>
-            setForm({ ...form, durationHours: selected })
+            setForm({ ...form, duration_hours: selected })
           }
-          name="DurationHoursPicker"
+          name="duration_hoursPicker"
           style={{ flex: 3 }}
         >
           {Array.from({ length: 13 }, (_, i) => {
@@ -95,11 +111,11 @@ export default function FormPage({ navigation, route }) {
         <Text style={{ flex: 1 }}>:</Text>
 
         <Picker
-          value={form.durationMinutes}
+          value={form.duration_minutes}
           onValueChange={(selected) =>
-            setForm({ ...form, durationMinutes: selected })
+            setForm({ ...form, duration_minutes: selected })
           }
-          name="DurationMinutesPicker"
+          name="duration_minutesPicker"
           style={{ flex: 3 }}
         >
           {Array.from({ length: 60 }, (_, i) => {
@@ -139,7 +155,7 @@ export default function FormPage({ navigation, route }) {
             styles.deleteButton,
             pressed && { opacity: 0.6 },
           ]}>
-          <Text style={styles.deleteText}>isEdit</Text>
+          <Text style={styles.deleteText}>Delete</Text>
         </Pressable>
       )}
 

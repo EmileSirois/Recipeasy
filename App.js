@@ -6,6 +6,7 @@ import LoginPage from "./pages/auth/LoginPage.js";
 import SignUpPage from "./pages/auth/SignUpPage.js";
 import FormPage from "./pages/recipes/FormPage.js";
 import ListPage from "./pages/recipes/ListPage.js";
+import auth from "./services/auth.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,10 @@ export default function App() {
           component={ListPage}
           options={({ navigation }) => ({
             headerRight: () => (
-              <Pressable style={styles.logOutBtn} onPress={() => navigation.popTo("LoginPage")}>
+              <Pressable style={styles.logOutBtn} onPress={() => {
+                auth.logOut();
+                navigation.popTo("LoginPage");
+              }}>
                 <Text style={styles.logOutBtnText}>LOG OUT</Text>
               </Pressable>
             ),

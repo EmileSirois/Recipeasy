@@ -2,6 +2,8 @@ import { Text, Button, View, FlatList, StyleSheet, Pressable } from "react-nativ
 import { styles, customTheme } from "../../style/Styles.js";
 import { useState, useEffect } from "react";
 import RecipeService from "../../services/recipes.js";
+import auth from '../../services/auth.js';
+import User from "../../models/user.js";
 
 const Item = ({id, category, name, duration_hours, duration_minutes, description, onPress }) => (
   <Pressable style={({ pressed }) => [
@@ -38,7 +40,8 @@ const emptyListMessage = () => (
 
 export default function ListPage({ navigation, route }) {
   const [recipes, setRecipes] = useState([]); 
-  const userId = route.params?.userId; // Récupère l'ID de l'utilisateur depuis les paramètres de navigation
+  const currentUser = new User(auth.currentUser);
+  const userId = currentUser.id;
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -50,8 +53,6 @@ export default function ListPage({ navigation, route }) {
 
     fetchRecipes();
   }, [route.params?.userId]);
-
-  console.log(recipes);
 
   function handleAdd() {
     navigation.navigate("FormPage");

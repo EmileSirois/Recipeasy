@@ -4,7 +4,6 @@ import { MARTHA_URL, MARTHA_AUTH } from "../config/config.js";
 export class AuthService {
     #currentUser = null // ATTENTION, à utiliser judicieusement
     
-
     get currentUser() {
         return this.#currentUser
     }

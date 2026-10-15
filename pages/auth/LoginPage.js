@@ -3,22 +3,18 @@ import { styles, customTheme } from "../../style/Styles.js";
 import { useState } from "react";
 import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../../components/Field.js";
-import User from "../../models/user.js";
 import UserCredentials from "../../models/user-credentials.js";
 import auth from '../../services/auth.js';
 
 
 export default function LoginPage({ navigation }) {
-  const [user, setUser] = useState()
   const [credentials, setCredentials] = useState(new UserCredentials({username: '', password: ''}))
 
   async function handleLogin() {
     const success = await auth.logIn(credentials)
 
-    setUser(auth.currentUser)
-
     if (success) {
-      navigation.replace("ListPage", { userId: auth.currentUser.id });
+      navigation.replace("ListPage");
     } else {
       Toast.error("Invalid credentials");
     }
