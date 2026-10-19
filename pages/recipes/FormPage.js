@@ -26,6 +26,7 @@ export default function FormPage({ navigation, route }) {
     duration_hours: 0,
     duration_minutes: 0,
     description: "",
+    id: recipe.id ?? null,
     ...recipe,
   });
 
@@ -40,6 +41,23 @@ export default function FormPage({ navigation, route }) {
   }
 
   async function handleSave() {
+    const updated = {
+      ...recipe,
+      ...form,
+    };
+    console.log(updated.id);
+
+    updated.user_id = auth.currentUser.id; // TODO: replace with current user id
+    const success = await recipes.update(updated);
+    if (success) {
+      navigation.replace("ListPage");
+    }
+    else{
+      Toast.error("Erreur lors de la mise à jour");
+    }
+  }
+
+  async function handleAdd(action) {
     // check si les données sont valides
     let errorLog = [];
 
@@ -55,7 +73,7 @@ export default function FormPage({ navigation, route }) {
 
     if (errorLog.length > 0) {
       Toast.error(errorLog.join("\n"));
-    } else {
+    } else if (action === "add") {
       Toast.success("Enrigestrement valide");
       const updated = {
         ...recipe,
@@ -70,6 +88,9 @@ export default function FormPage({ navigation, route }) {
       else{
         Toast.error("Erreur lors de l'enregistrement");
       }
+    }
+    else if (action === "update") {
+      handleSave();
     }
   }
 
@@ -137,7 +158,7 @@ export default function FormPage({ navigation, route }) {
 
       {isEmpty && (
         <Pressable
-          onPress={handleSave}
+          onPress={() => handleAdd("add")}
           accessibilityRole="button"
           style={({ pressed }) => [
             styles.button,
@@ -147,18 +168,31 @@ export default function FormPage({ navigation, route }) {
           <Text style={styles.saveText}>Save</Text>
         </Pressable>
       )}
-      {!isEmpty && (
-        <Pressable
-          onPress={handleDelete}
-          accessibilityRole="button"
-          style={({ pressed }) => [
-            styles.deleteButton,
-            pressed && { opacity: 0.6 },
-          ]}>
-          <Text style={styles.deleteText}>Delete</Text>
-        </Pressable>
-      )}
-
+      <View style={{ flex: 1, flexDirection: "row" }} >
+        {!isEmpty && (
+          <Pressable
+            onPress={handleDelete}
+            accessibilityRole="button"
+            style={({ pressed }) => [
+              styles.deleteButton,
+              pressed && { opacity: 0.6 },
+            ]}>
+            <Text style={styles.deleteText}>Delete</Text>
+          </Pressable>
+        )}
+        {!isEmpty && (
+          <Pressable
+            onPress={() => handleAdd("update")}
+            accessibilityRole="button"
+            style={({ pressed }) => [
+              styles.button,
+              styles.saveButton,
+              pressed && { opacity: 0.6 },
+            ]}>
+            <Text style={styles.saveText}>Save</Text>
+          </Pressable>
+        )}
+      </View>
       <ToastManager />
     </View>
   );

@@ -55,6 +55,28 @@ export class RecipeService {
             return true
         }
     }
+
+    async update(recipe) {
+        // recipe = {...recipe, user_id: userId} // TODO: replace with current user id
+        console.log("update recipe", recipe);
+
+        const response = await fetch(`${MARTHA_URL}/update-recipe/execute`, {
+            method: 'POST',
+            body: JSON.stringify(recipe),
+            headers: {
+                'auth': MARTHA_AUTH
+            }
+        }).then((r) => r.json())
+
+        // console.log("update response", response);
+
+        if (!response.success) {
+            return false
+        }
+        else {
+            return true
+        }
+    }
 }
 
 const service = new RecipeService();

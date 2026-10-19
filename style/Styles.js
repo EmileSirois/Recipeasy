@@ -86,6 +86,8 @@ export const styles = StyleSheet.create({
   saveButton: {
     backgroundColor: customTheme.colors.card,
     borderColor: customTheme.colors.border,
+    flex: 1,
+    marginHorizontal: 5,
   },
   saveText: {
     color: customTheme.colors.text,
@@ -98,6 +100,8 @@ export const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 2,
     borderColor: "red",
+    flex: 1,
+    marginHorizontal: 5,
   },
   deleteText: {
     color: "red",
