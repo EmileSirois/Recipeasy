@@ -66,6 +66,7 @@ export default function ListPage({ navigation, route }) {
   return (
     <View name="LoginView" style={[styles.listContainer, styles.centerBox]}>
       <FlatList
+        style={{flex: 1}}
         data={recipes}
         renderItem={({item}) => <Item {...item} onPress={() => handleListPress(item.id)} />}
         keyExtractor={item => String(item.id)}
@@ -73,12 +74,15 @@ export default function ListPage({ navigation, route }) {
         ListEmptyComponent={emptyListMessage}
       />
       
-      <Button
-        name="AddButton"
-        color={customTheme.colors.card}
-        title="Add"
-        onPress={() => handleAdd()} // dirige l'utilisatuer vers le formulaire de recette en mode add
-      />
+      <Pressable
+        onPress={() => handleAdd()}
+        accessibilityRole="button"
+        style={[
+          styles.button,
+          styles.addButton
+        ]}>
+        <Text style={styles.saveText}>Add</Text>
+      </Pressable>
     </View>
   );
 }

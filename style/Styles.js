@@ -107,5 +107,9 @@ export const styles = StyleSheet.create({
     color: "red",
     fontWeight: "600",
   },
+  addButton: {
+    backgroundColor: customTheme.colors.card,
+    margin: 20,
+  }
 });
 
