@@ -1,13 +1,12 @@
-import { Text, Button, View, Pressable } from "react-native";
+import { Text, View, Pressable } from "react-native";
 import { useState } from "react";
-import { styles, customTheme } from "../../style/Styles.js";
+import { styles } from "../../style/Styles.js";
 import RadioGroup from "react-native-radio-buttons-group";
 import { Picker } from "@react-native-picker/picker";
 import ToastManager, { Toast } from "toastify-react-native";
 import Field from "../../components/Field.js";
 import recipes from "../../services/recipes.js";
 import auth from "../../services/auth.js";
-import Recipe from "../../models/recipe.js";
 
 export default function FormPage({ navigation, route }) {
   const { recipe = {} } = route.params ?? {};
@@ -45,7 +44,6 @@ export default function FormPage({ navigation, route }) {
       ...recipe,
       ...form,
     };
-    console.log(updated.id);
 
     updated.user_id = auth.currentUser.id; // TODO: replace with current user id
     const success = await recipes.update(updated);
@@ -117,7 +115,7 @@ export default function FormPage({ navigation, route }) {
         <Text style={{ flex: 2 }}>Duration</Text>
 
         <Picker
-          value={form.duration_hours}
+          selectedValue={form.duration_hours}
           onValueChange={(selected) =>
             setForm({ ...form, duration_hours: selected })
           }
@@ -132,7 +130,7 @@ export default function FormPage({ navigation, route }) {
         <Text style={{ flex: 1 }}>:</Text>
 
         <Picker
-          value={form.duration_minutes}
+          selectedValue={form.duration_minutes}
           onValueChange={(selected) =>
             setForm({ ...form, duration_minutes: selected })
           }

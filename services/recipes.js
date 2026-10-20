@@ -29,8 +29,6 @@ export class RecipeService {
             }
         }).then((r) => r.json())
 
-        console.log("insert response", response);
-
         if (!response.success) {
             return false
         }
@@ -57,9 +55,6 @@ export class RecipeService {
     }
 
     async update(recipe) {
-        // recipe = {...recipe, user_id: userId} // TODO: replace with current user id
-        console.log("update recipe", recipe);
-
         const response = await fetch(`${MARTHA_URL}/update-recipe/execute`, {
             method: 'POST',
             body: JSON.stringify(recipe),
@@ -67,8 +62,6 @@ export class RecipeService {
                 'auth': MARTHA_AUTH
             }
         }).then((r) => r.json())
-
-        // console.log("update response", response);
 
         if (!response.success) {
             return false
