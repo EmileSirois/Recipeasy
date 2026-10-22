@@ -64,18 +64,6 @@ export const styles = StyleSheet.create({
     padding: 10,
     fontWeight: "bold",
   },
-  // deleteButton: {
-  //   backgroundColor: customTheme.colors.background,
-  //   padding: 10,
-  //   alignItems: "center",
-  //   borderRadius: 3,
-  //   borderWidth: 2,
-  //   borderColor: "red",
-  // },
-  // deleteText: {
-  //   color: "red",
-  //   fontWeight: "bold",
-  // },
   button: {
     borderWidth: 2,
     borderRadius: 6,
