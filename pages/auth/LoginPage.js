@@ -11,12 +11,15 @@ export default function LoginPage({ navigation }) {
   const [credentials, setCredentials] = useState(new UserCredentials({username: '', password: ''}))
 
   async function handleLogin() {
-    const success = await auth.logIn(credentials)
-
-    if (success) {
-      navigation.replace("ListPage");
-    } else {
-      Toast.error("Invalid credentials");
+    try {
+      const ok = await auth.logIn(credentials);
+      if (ok) {
+        navigation.replace("ListPage");
+      } else {
+        Toast.error("Identifiants invalides");
+      }
+    } catch (e) {
+      Toast.error(e.message);
     }
   }
 

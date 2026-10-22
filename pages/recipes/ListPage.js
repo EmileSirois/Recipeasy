@@ -1,9 +1,16 @@
-import { Text, Button, View, FlatList, StyleSheet, Pressable } from "react-native";
+import { Text,  View, FlatList, StyleSheet, Pressable } from "react-native";
 import { styles, customTheme } from "../../style/Styles.js";
 import { useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import RecipeService from "../../services/recipes.js";
 import auth from '../../services/auth.js';
 import User from "../../models/user.js";
+
+function RecipeIcon({ category }) {
+  if (category == 1) return <Ionicons name="cafe" size={28} color={customTheme.colors.card} />
+  if (category == 2) return <Ionicons name="fast-food" size={28} color={customTheme.colors.card} />
+  if (category == 3) return <Ionicons name="restaurant" size={28} color={customTheme.colors.card} />
+}
 
 const Item = ({id, category, name, duration_hours, duration_minutes, description, onPress }) => (
   <Pressable style={({ pressed }) => [
@@ -13,7 +20,7 @@ const Item = ({id, category, name, duration_hours, duration_minutes, description
     onPress = {onPress}>
 
     <View style={{flex: 1, flexDirection: "row", gap: 10, alignItems: "center"}}>
-      <Text style={ItemStyles.category}>{category}</Text>
+      <RecipeIcon category={category} />
       <Text style={ItemStyles.title}>{name}</Text>
     </View>
 
@@ -46,8 +53,17 @@ export default function ListPage({ navigation, route }) {
   useEffect(() => {
     const fetchRecipes = async () => {
       if (userId) {
-        const recipesList = await RecipeService.getAll(userId);
-        setRecipes(recipesList);
+        try{
+          const recipesList = await RecipeService.getAll(userId);
+          if(recipesList){
+            setRecipes(recipesList);
+          }
+          else{
+            Toast.error("Liste introuvable");
+          }
+        } catch(e) {
+          Toast.error(e.message);
+        }
       }
     };
 

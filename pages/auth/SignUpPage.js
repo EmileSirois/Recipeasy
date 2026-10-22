@@ -32,12 +32,15 @@ export default function SignUpPage({ navigation }) {
     }
     else
     {
-      const success = await auth.signUp(credentials)
-
-      if (success) {
-        navigation.replace("ListPage");
-      } else {
-        Toast.error("Invalid credentials");
+      try {
+        const ok = await auth.signUp(credentials);
+        if (ok) {
+          navigation.replace("ListPage");
+        } else {
+          Toast.error("Identifiants invalides");
+        }
+      } catch (e) {
+        Toast.error(e.message);
       }
     }
   }

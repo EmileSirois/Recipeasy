@@ -3,15 +3,26 @@ import { MARTHA_URL, MARTHA_AUTH } from "../config/config.js";
 
 export class RecipeService {
     async getAll(userId) {
+        let response
 
-        const response = await fetch(`${MARTHA_URL}/select-recipes/execute`, {
+        try{
+            response = await fetch(`${MARTHA_URL}/select-recipes/execute`, {
             method: 'POST',
             body: JSON.stringify({ id: userId }),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+        })
+        } catch(e) {
+            throw new Error("Impossible de joindre le serveur")
+        }
 
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
+    
         if (!response.success) {
             return []
         }
@@ -21,13 +32,25 @@ export class RecipeService {
 
     async insert(recipe, userId) {
         recipe = {...recipe, user_id: userId} // TODO: replace with current user id
-        const response = await fetch(`${MARTHA_URL}/insert-recipe/execute`, {
+        let response
+
+        try{
+            response = await fetch(`${MARTHA_URL}/insert-recipe/execute`, {
             method: 'POST',
             body: JSON.stringify(recipe),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+            })
+        } catch(e) {
+            throw new Error("Impossible de joindre le serveur")
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
 
         if (!response.success) {
             return false
@@ -38,13 +61,25 @@ export class RecipeService {
     }
 
     async delete(recipeId, userId) {
-        const response = await fetch(`${MARTHA_URL}/delete-recipe/execute`, {
+        let response
+
+        try{
+            response = await fetch(`${MARTHA_URL}/delete-recipe/execute`, {
             method: 'POST',
             body: JSON.stringify({ id: recipeId, user_id: userId }),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+            })
+        } catch(e) {
+            throw new Error("Impossible de joindre le serveur")
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
 
         if (!response.success) {
             return false
@@ -55,13 +90,25 @@ export class RecipeService {
     }
 
     async update(recipe) {
-        const response = await fetch(`${MARTHA_URL}/update-recipe/execute`, {
+        let response
+
+        try{
+            response = await fetch(`${MARTHA_URL}/update-recipe/execute`, {
             method: 'POST',
             body: JSON.stringify(recipe),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+            })
+        } catch(e) {
+            throw new Error("Impossible de joindre le serveur")
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
 
         if (!response.success) {
             return false

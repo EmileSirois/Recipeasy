@@ -9,13 +9,24 @@ export class AuthService {
     }
 
     async signUp(credentials) {
-        const response = await fetch(`${MARTHA_URL}/insert-user/execute`, {
+        let response
+        try{
+            response = await fetch(`${MARTHA_URL}/insert-user/execute`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+            })
+        } catch(e){
+            throw new Error("Impossible de joindre le serveur");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
 
         if (response.success)  {
             this.#currentUser = new User({ id: response.lastInsertId, username: credentials.username })
@@ -25,13 +36,27 @@ export class AuthService {
     }
 
     async logIn(credentials) {
-        const response = await fetch(`${MARTHA_URL}/select-user-auth/execute`, {
+        let response
+        
+        try{
+            response = await fetch(`${MARTHA_URL}/select-user-auth/execute`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: {
                 'auth': MARTHA_AUTH
             }
-        }).then((r) => r.json())
+            })
+        } catch(e){
+            throw new Error("Impossible de joindre le serveur");
+        }
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur (${response.status})`);
+        }
+
+        response = await response.json(); 
+
+        console.log(response)
 
         if (response.success && response.data.length == 1)  {
             const user = response.data[0]
@@ -41,7 +66,7 @@ export class AuthService {
             this.#currentUser = null
         }
 
-        return !!this.#currentUser
+        return this.#currentUser !== null;
     }
 
     logOut() {

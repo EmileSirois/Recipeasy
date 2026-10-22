@@ -30,12 +30,16 @@ export default function FormPage({ navigation, route }) {
   });
 
   async function handleDelete() {
-    const success = await recipes.delete(recipe.id, auth.currentUser.id);
-    if (success) {
-      navigation.replace("ListPage");
-    }
-    else{
-      Toast.error("Erreur lors de la suppression");
+    try{
+      const success = await recipes.delete(recipe.id, auth.currentUser.id);
+      if (success) {
+        navigation.replace("ListPage");
+      }
+      else{
+        Toast.error("Erreur lors de la suppression");
+      }
+    } catch(e) {
+      Toast.error(e.message);
     }
   }
 
@@ -46,12 +50,17 @@ export default function FormPage({ navigation, route }) {
     };
 
     updated.user_id = auth.currentUser.id; // TODO: replace with current user id
-    const success = await recipes.update(updated);
-    if (success) {
-      navigation.replace("ListPage");
-    }
-    else{
-      Toast.error("Erreur lors de la mise à jour");
+
+    try{
+      const success = await recipes.update(updated);
+      if (success) {
+        navigation.replace("ListPage");
+      }
+      else{
+        Toast.error("Erreur lors de la mise à jour");
+      }
+    } catch(e){
+      Toast.error(e.message);
     }
   }
 
@@ -72,20 +81,25 @@ export default function FormPage({ navigation, route }) {
     if (errorLog.length > 0) {
       Toast.error(errorLog.join("\n"));
     } else if (action === "add") {
-      Toast.success("Enrigestrement valide");
+      // Toast.success("Enrigestrement valide");
       const updated = {
         ...recipe,
         ...form,
       };
-
-      const success = await recipes.insert(updated, auth.currentUser.id);
       
-      if (success) {
-        navigation.replace("ListPage");
+      try{
+        const success = await recipes.insert(updated, auth.currentUser.id);
+      
+        if (success) {
+          navigation.replace("ListPage");
+        }
+        else{
+          Toast.error("Erreur lors de l'enregistrement");
+        }
+      } catch(e){
+        Toast.error(e.message);
       }
-      else{
-        Toast.error("Erreur lors de l'enregistrement");
-      }
+      
     }
     else if (action === "update") {
       handleSave();
